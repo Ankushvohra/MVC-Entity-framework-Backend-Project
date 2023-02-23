@@ -1,0 +1,56 @@
+﻿@model IEnumerable<mvc_learning.Models.Employee>
+
+@if (!Model.Any())
+{
+                <p>No Data Found</p>
+}
+else
+{
+
+<div class="alert alert-info" role="alert">
+    <h5 class="text-center">EMPLOYEE DATA</h5>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th class="alert-info">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th class="alert-info">
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th class="alert-info">
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th class="alert-info"></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    using(Html.BeginForm("delete_new","Employee",new {ID = item.ID }))
+                    {
+                     <tr>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.Name)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.Address)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.Age)
+                         </td>
+                         <td>
+                             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-info" }) |
+                             @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-info" }) |
+                             <input type="submit" value="Delete" class="btn btn-info" onclick="return confirm(' Do You want To Delete ?')" />
+                         </td>
+                     </tr>   
+                    }
+}
+
+</table>
+<p>
+    <h2 class="text-primary text-center">
+        @Html.ActionLink("ADD DATA", "Create", "Student", new { @class = "btn btn-info" })
+    </h2>
+</p>
+}
